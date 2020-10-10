@@ -83,7 +83,7 @@ void level_order_queue(queue <bstptr> &Q,queue <int> &leve_orde)
 }
 void squi_leve_p(queue <int> leve_orde)
 {
-    int i=1,j=1;
+    int i=1,j=1,k;
     stack <int> for_rev;
 
     while(!leve_orde.empty())
@@ -178,6 +178,4 @@ int main()
     squi_leve_p(leve_orde);
     cout<<endl;
     rev_squi_leve_p(leve_orde);
-    cout<<endl;
-
 }
