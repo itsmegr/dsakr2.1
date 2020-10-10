@@ -45,6 +45,24 @@ void serialization(btptr T)
     else
     cout<<". ";
 }
+void iterativeDLR(btptr T)
+{
+    stack <btptr> s;
+    if(T->rchild!=NULL)
+    s.push(T->rchild);
+    cout<<T->data;
+    T = T->lchild;
+    while(!s.empty())
+    {
+        cout<<T->data;
+        if(T->rchild!=NULL)
+        s.push(T->rchild);
+        if(T->lchild!=NULL)
+        T = T->lchild;
+        else 
+        T = s.top();
+    }
+}
 int main()
 {
     btptr T = NULL;
