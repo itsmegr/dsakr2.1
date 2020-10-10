@@ -39,6 +39,7 @@ void levelPrint(queue <bstptr> &Q)
             bstptr changeptr = Q.front();
             Q.pop();
             cout<<endl;
+            if(!Q.empty())
             Q.push(changeptr);
             levelPrint(Q);
             
@@ -54,8 +55,6 @@ void levelPrint(queue <bstptr> &Q)
             Q.push(temp->rchild);
             levelPrint(Q);
         }
-        
-        
     }
 }
 int main()
@@ -77,6 +76,7 @@ int main()
     queue <bstptr> Q;
     Q.push(T);
     bstptr temp;
+    temp = new bstnode;
     temp->data = -1;
     temp->rchild=NULL;
     temp->lchild = NULL;
