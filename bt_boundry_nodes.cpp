@@ -99,5 +99,4 @@ int main()
     leftMostPath(T);
     root_leaf_all(T);
     rightMostPath(T);
-
 }

@@ -25,10 +25,8 @@ void create(bstptr &T, int k)
         else
         {
             create(T->lchild, k);
-        }
-        
+        } 
     }
-    
 }
 void levelPrint(queue <bstptr> &Q)
 {

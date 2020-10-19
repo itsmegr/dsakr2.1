@@ -4,11 +4,12 @@ typedef struct btnode *btptr;
 struct btnode
 {
     struct btnode *lchild;
-    int data;
+    char data;
     struct btnode *rchild;
+    int space = 0;
     
 };
-void insert(btptr &T, int k)
+void insert(btptr &T, char k, int space)
 {
     if(T==NULL)
     {
@@ -16,16 +17,17 @@ void insert(btptr &T, int k)
         T->data = k;
         T->lchild = NULL;
         T->rchild = NULL;
+        T->space = space;
     }
-    int ch;
+    char ch;
     cin>>ch;
-    if(ch!=0)
-    insert(T->lchild, ch);
+    if(ch!='#')
+    insert(T->lchild, ch, space-1);
     cin>>ch;
-    if(ch!=0)
-    insert(T->rchild, ch);
+    if(ch!='#')
+    insert(T->rchild, ch, space+1);
 }
-void lee_order_qu(queue <btptr> &Q, queue<int> &lev_or)
+void lee_order_qu(queue <btptr> &Q, int lastSpace)
 {
     if(!Q.empty())
     {
@@ -34,33 +36,31 @@ void lee_order_qu(queue <btptr> &Q, queue<int> &lev_or)
             btptr changeptr = Q.front();
             Q.pop();
             cout<<endl;
-            lev_or.push(-1);
+            lastSpace = 0;
             if(!Q.empty())
             Q.push(changeptr);
-            lee_order_qu(Q, lev_or);
+            lee_order_qu(Q, lastSpace);
         }
         else
         {
             btptr temp = Q.front();
             Q.pop();
-            lev_or.push(temp->data);
+            if(lastSpace==0)
+            for(int i=0;i<=temp->space-lastSpace-1;i++) cout<<" ";
+            else
+            for(int i=0;i<=temp->space-lastSpace-3;i++) cout<<" ";
             cout<<temp->data<<" ";
             if(temp->lchild!=NULL)
             Q.push(temp->lchild);
             if(temp->rchild!=NULL)
             Q.push(temp->rchild);
-            lee_order_qu(Q, lev_or);
+            lee_order_qu(Q, temp->space);
         }
     }
 }
-int main()
+void solution(btptr &T)
 {
     queue <btptr> Q;
-    queue <int> lev_or;
-    btptr T = NULL;
-    int n;
-    cin>>n;
-    insert(T, n);
     Q.push(T);
     btptr temp;
     temp = new(btnode);
@@ -68,11 +68,13 @@ int main()
     temp->lchild= NULL;
     temp->rchild = NULL;
     Q.push(temp);
-    lee_order_qu(Q, lev_or);
-    while(!lev_or.empty())
-    {
-        cout<<lev_or.front()<<" ";
-        lev_or.pop();
-    }
-
+    lee_order_qu(Q, 0);
+}
+int main()
+{
+    btptr T = NULL;
+    char n;
+    cin>>n;
+    insert(T, n, 10);
+    solution(T);
 }
