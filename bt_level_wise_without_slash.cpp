@@ -9,7 +9,7 @@ struct btnode
     int space = 0;
     
 };
-void insert(btptr &T, char k, int space)
+void insert(btptr &T, char k)
 {
     if(T==NULL)
     {
@@ -17,17 +17,16 @@ void insert(btptr &T, char k, int space)
         T->data = k;
         T->lchild = NULL;
         T->rchild = NULL;
-        T->space = space;
     }
     char ch;
     cin>>ch;
-    if(ch!='#')
-    insert(T->lchild, ch, space-1);
+    if(ch!='.')
+    insert(T->lchild, ch);
     cin>>ch;
-    if(ch!='#')
-    insert(T->rchild, ch, space+1);
+    if(ch!='.')
+    insert(T->rchild, ch);
 }
-void lee_order_qu(queue <btptr> &Q, int lastSpace)
+void lee_order_qu(queue <btptr> &Q, int space, int initSpace)
 {
     if(!Q.empty())
     {
@@ -36,25 +35,25 @@ void lee_order_qu(queue <btptr> &Q, int lastSpace)
             btptr changeptr = Q.front();
             Q.pop();
             cout<<endl;
-            lastSpace = 0;
+            initSpace = initSpace-space/2;
+            for(int i=0;i<=initSpace;i++)
+            cout<<" ";
             if(!Q.empty())
             Q.push(changeptr);
-            lee_order_qu(Q, lastSpace);
+            lee_order_qu(Q,space/2,initSpace);
         }
         else
         {
             btptr temp = Q.front();
             Q.pop();
-            if(lastSpace==0)
-            for(int i=0;i<=temp->space-lastSpace-1;i++) cout<<" ";
-            else
-            for(int i=0;i<=temp->space-lastSpace-3;i++) cout<<" ";
             cout<<temp->data<<" ";
+            for(int i=0;i<=space;i++)
+            cout<<" ";
             if(temp->lchild!=NULL)
             Q.push(temp->lchild);
             if(temp->rchild!=NULL)
             Q.push(temp->rchild);
-            lee_order_qu(Q, temp->space);
+            lee_order_qu(Q, space, initSpace);
         }
     }
 }
@@ -68,13 +67,14 @@ void solution(btptr &T)
     temp->lchild= NULL;
     temp->rchild = NULL;
     Q.push(temp);
-    lee_order_qu(Q, 0);
+    lee_order_qu(Q, 16, 64);
 }
 int main()
 {
     btptr T = NULL;
     char n;
     cin>>n;
-    insert(T, n, 10);
+    insert(T, n);
+    for(int i=0;i<=64;i++) cout<<" ";
     solution(T);
 }
