@@ -86,32 +86,49 @@ void rightMostPath(bstptr T, stack<bstptr> &st)
 }
 void root_leaf_all(bstptr T, stack<bstptr> &st)
 {
-    if(T->lchild!=NULL&&T->rchild!=NULL)
-    {
-        st.push(T);
-        root_leaf_all(T->lchild, st);
-        root_leaf_all(T->rchild, st);
-        st.pop();
-    }
-    else if(T->lchild==NULL&&T->rchild!=NULL)
-    {
-        st.push(T);
-        root_leaf_all(T->rchild, st);
-        st.pop();
-    }
-    else if(T->lchild!=NULL&&T->rchild==NULL)
-    {
-        st.push(T);
-        root_leaf_all(T->lchild, st);
-        st.pop();
-    }
-    else if(T->lchild==NULL&&T->rchild==NULL)
+    // if(T->lchild!=NULL&&T->rchild!=NULL)
+    // {
+    //     st.push(T);
+    //     root_leaf_all(T->lchild, st);
+    //     root_leaf_all(T->rchild, st);
+    //     st.pop();
+    // }
+    // else if(T->lchild==NULL&&T->rchild!=NULL)
+    // {
+    //     st.push(T);
+    //     root_leaf_all(T->rchild, st);
+    //     st.pop();
+    // }
+    // else if(T->lchild!=NULL&&T->rchild==NULL)
+    // {
+    //     st.push(T);
+    //     root_leaf_all(T->lchild, st);
+    //     st.pop();
+    // }
+    // else if(T->lchild==NULL&&T->rchild==NULL)
+    // {
+    //     st.push(T);
+    //     printStackRe(st);
+    //     cout<<endl;
+    //     st.pop();
+    // }
+    if(T==NULL)
+    return;
+    if(T->lchild==NULL&&T->rchild==NULL)
     {
         st.push(T);
         printStackRe(st);
         cout<<endl;
         st.pop();
     }
+    else
+    {
+        st.push(T);
+        root_leaf_all(T->lchild, st);
+        root_leaf_all(T->rchild, st);
+        st.pop();
+    }
+    
 }
 void copyStack(stack<bstptr> st, stack<bstptr> &maxSum)
 {

@@ -25,7 +25,7 @@ void addEnd(lptr P, int n)
 
     P->next =T;
 }
-void addBefore(lptr P, int x, int y)
+void insert(lptr P, int x, int y)
 {
 
     if(P!=NULL)
@@ -41,112 +41,14 @@ void addBefore(lptr P, int x, int y)
         else 
         {
             P =P->next;
-            addBefore(P,x,y);
+            insert(P,x,y);
         }
     }
 }
-void addAfter(lptr P, int x, int y)
+void del_front(lptr &P)
 {
-
-    if(P!=NULL)
-    {
-        if(P->data==y)
-        {
-            lptr T;
-            T = new(node);
-            T->data = x, T->next = NULL;
-            T->next = P->next;
-            P->next = T;
-        }
-        else 
-        {
-            P =P->next;
-            addAfter(P,x,y);
-        }
-    }
+    P = P->next;
 }
-
-
-
-
-
-
-
-void del_k(lptr &P,lptr L, int k)
-{
-    // lptr L = P;
-   if(k==P->data)
-    {
-        P = P->next;
-    }
-   else if(L->next!=NULL)
-   {
-        if(k==L->next->data)
-        {
-            L->next = L->next->next;
-        }
-        else 
-        {
-            L = L->next;
-            del_k(P, L, k);
-        }
-   }
-    
-}
-
-
-
-void del_kth_ele(lptr &P,lptr L, int k)
-{
-    if(k==1)
-    {
-        P = P->next;
-    }
-    else if(L->next!=NULL)
-    {
-        int i=2;
-        while(L->next!=NULL)
-        {
-            if(i==k)
-            {
-                L->next = L->next->next;
-            }
-            else
-            {
-                L = L->next;
-            }
-            i++;
-        }
-    }
-}
-
-
-int getKth(lptr P, int k, int n)
-{
-    int i=1;
-    if(k<=0&&k>n)
-    return -1;
-    else
-    {
-        while(P!=NULL)
-        {
-            if (i==k) return P->data;
-            else
-            {
-                P=P->next;
-                i++;
-            }
-        }
-        return -1;
-    }
-}
-
-
-
-
-
-
-
 
 void print_list(lptr P)
 {
@@ -170,6 +72,7 @@ void rev_print(lptr P)
     }
     
 }
+
 int node_count(lptr P)
 {
     if(P->next!=NULL)
@@ -239,6 +142,7 @@ int even_node_num(lptr P)
     else return 0;
     
 }
+
 int find(lptr P, int x)
 {
     if(P!=NULL)
@@ -252,6 +156,69 @@ int find(lptr P, int x)
         }
 
     }
-    else return 0
+    else return 0;
 }
-its done
+
+
+int main()
+{
+
+    lptr L,SP,FP;
+    L = new(node);
+    SP =L, FP =L;
+    int n,x, max=-9999,min = 9999,k;
+    cin>>n;
+    L->data = n, L->next = NULL;
+    cin>>n;
+    while(n>=0)
+
+    lptr L;
+    L = new(node);
+    int n,x;
+    cin>>n;
+    L->data = n, L->next = NULL;
+    cin>>n;
+    while(n>0)
+
+    {
+        addEnd(L,n);
+        cin>>n;
+    }
+  
+    print_list(L);
+    cout<<endl;
+
+
+    rev_print(L);
+    cout<<endl;
+
+    cout<<node_count(L)<<endl;
+
+    min_ele(L, min);
+    cout<<min<<endl;
+
+    max_ele(L,max);
+    cout<<max<<endl;
+
+
+    if(middle(L,SP,FP)==0)
+    cout<<SP->data<<" "<<SP->next->data<<endl;
+    else cout<<SP->data<<endl;
+
+    cout<<odd_node_num(L)<<endl;
+
+    cout<<even_node_num(L)<<endl;
+
+    cin>>k;
+    cout<<find(L, k);
+    
+
+
+
+
+
+    cin>>x;
+    insert(L, x, 5);
+    print_list(L);
+
+}

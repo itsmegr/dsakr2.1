@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+typedef struct node *lptr;
+
+struct node
+{
+     int data;
+     lptr next;
+};
+void create(lptr &L)
+{
+    lptr P,T;
+    int n;
+    cin>>n;
+    while(n>0)
+    {
+        P = L;
+        T = new(node);
+        T->data = n;
+        T->next = NULL;
+        if(L==NULL)
+        L = T;
+        else
+        {
+            while(P->next!=NULL)
+            P = P->next;
+            P->next =T;
+        }
+        cin>>n;  
+    }
+}

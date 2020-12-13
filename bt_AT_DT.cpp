@@ -37,7 +37,6 @@ void AT_DT(btptr BT, int &t)
 
 int main()
 {
-    freopen("input.txt","r",stdin);
     btptr BT = NULL;
     int a;
     cin>>a;

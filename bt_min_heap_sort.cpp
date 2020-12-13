@@ -70,7 +70,7 @@ int main()
         A.push_back(k);
     }
     bool heap = true;
-    arrayHeapOrNot(A, 0, heap);
+    // arrayHeapOrNot(A, 0, heap);
     cout<<heap<<endl;
     H.push_back(A[0]);
     for(int i=1;i<A.size();i++)
@@ -81,9 +81,10 @@ int main()
     for(int i=0;i<n;i++)
     {
         cout<<H[0]<<" ";
-        H[0]=H[H.size()-1];
+        H[0]=H[H.size()-1];      
         H.pop_back();
         if(H.size()>1)
         heapsort(H, 0);
     }
 }
+
